@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 class UserBase(BaseModel):
     username: str
@@ -45,3 +45,15 @@ class ViolationResponse(ViolationBase):
     created_at: datetime
     class Config:
         from_attributes = True
+
+class PlateDetectionResult(BaseModel):
+    plate_number: str
+    confidence: float
+    crop_path: str
+    bbox: list
+    timestamp: Optional[float] = None
+    frame_number: Optional[int] = None
+
+class VideoUploadResponse(BaseModel):
+    video: VideoResponse
+    detected_plates: List[PlateDetectionResult]
