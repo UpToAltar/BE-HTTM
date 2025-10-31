@@ -20,7 +20,7 @@ async def upload_video(
     user_id = int(current_user.get("sub"))
     video_record : VideoResponse = await video_service.upload_file_service(db, user_id, file)
     
-    detected_plates : List[PlateDetectionResult] = video_service.handle_logic_video(video_record, file)
+    detected_plates : List[PlateDetectionResult] = video_service.handle_logic_video(db, video_record, file)
     
     return VideoUploadResponse(
         video=video_record,

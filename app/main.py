@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
-from app.routers import auth_router, video_router
+from app.routers import auth_router, video_router, log_router
 import os
 from dotenv import load_dotenv
 
@@ -29,6 +29,7 @@ app.add_middleware(
 # Include routers
 app.include_router(auth_router.router, prefix="/api/v1/auth", tags=["authentication"])
 app.include_router(video_router.router, prefix="/api/v1/videos", tags=["videos"])
+app.include_router(log_router.router, prefix="/api/v1/logs", tags=["logs"])
 
 @app.get("/")
 async def root():
