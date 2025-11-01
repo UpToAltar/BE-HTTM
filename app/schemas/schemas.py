@@ -31,6 +31,7 @@ class VideoBase(BaseModel):
 
 class VideoResponse(VideoBase):
     id: int
+    log_path: Optional[str] = None
     created_at: datetime
     class Config:
         from_attributes = True

@@ -111,12 +111,11 @@ class VideoService:
                     has_red_light = traffic_light_service.detect_red_light(frame)
                     if has_red_light:
                         is_red_light_detected = True
-                    
-                    timestamp = frame_count / fps
-                    plates = plate_service.detect_and_recognize(frame, timestamp=timestamp, frame_number=frame_number)
-                    detected_plates.extend(plates)
-                    frame_number += 1
-                
+                        timestamp = frame_count/fps
+                        plate = plate_service.detect_and_recognize(frame,timestamp=timestamp,frame_number=frame_number)
+                        detected_plates.extend(plate)
+                        frame_number += 1
+
                 frame_count += 1
             
             cap.release()
@@ -126,8 +125,7 @@ class VideoService:
             has_red_light = traffic_light_service.detect_red_light(image)
             if has_red_light:
                 is_red_light_detected = True
-            
-            detected_plates = plate_service.detect_and_recognize(image)
+                detected_plates = plate_service.detect_and_recognize(image)
         
         unique_plates = plate_service.get_unique_plates(detected_plates)
         
@@ -204,6 +202,7 @@ class VideoService:
         
         # Chuẩn hóa đường dẫn
         normalized_zip_path = zip_file_path.replace("\\", "/")
+        print("Log path: ", normalized_zip_path)
         
         # Cập nhật log_path vào database
         video_db = db.query(Video).filter(Video.id == video_record.id).first()

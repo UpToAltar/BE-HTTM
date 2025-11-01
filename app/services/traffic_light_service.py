@@ -26,7 +26,7 @@ class TrafficLightService:
         # has_red_light = self._check_red_light_in_results(results)
         
         # Hiện tại return False (giả lập - chưa có model thật)
-        has_red_light = False
+        has_red_light = True
         
         return has_red_light
     
